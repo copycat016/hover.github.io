@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可下拉的导航栏</title>
+    <style>
+        /* 全局样式 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #424141;
+            padding: 0px 20px;
+            color: white;
+            z-index: 10;
+        }
+        /* Logo */
+        .logo img{
+            height: 50px;    /* 设置logo高度 */
+            width: auto;     /* 保持宽高比 */
+        }    
+
+        /* 导航菜单样式 */
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            width:100px;
+            position: relative;
+            padding: 10px 10px;
+            text-align: center;
+        }
+        .nav-links li:hover  {
+            background-color: #333;
+        }
+
+        .nav-links a {
+            width: 100px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            
+        }
+
+        /* 下拉菜单样式 */
+        .dropdown-menu {
+            border: 0.5px solid #585656;
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #EEEEEE;
+            padding: 10px 0;
+            border-radius: 2px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 10px;
+            color: black;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #E8E8E8;
+        }
+
+        /* 鼠标悬停时显示下拉菜单 */
+        .nav-links li:hover .dropdown-menu {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        /* 下滑动画 */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 汉堡菜单按钮 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px;
+        }
+
+        /* 响应式设计：小屏幕折叠 */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            /* 移动端下拉菜单居中显示 */
+            .dropdown-menu {
+                position: relative;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部导航栏 -->
+<nav class="navbar">
+    <div class="logo">
+        <img src="./pic/logo/HoverLogo%E7%89%88%E6%9C%AC3_%E5%AE%8C%E6%95%B4%E7%89%88_%E9%80%8F%E6%98%8E%E8%83%8C%E6%99%AF_%E7%99%BD%E5%AD%97.png" alt="Hover Mad Team Logo">
+    </div>
+
+    <!-- 导航菜单 -->
+    <ul class="nav-links" id="navLinks">
+        <li>
+            <a href="。/Hover.html" >首页</a>
+        </li>
+        <li>
+            <a href="#" >活动</a>
+            <!-- 下拉菜单 -->
+            <div class="dropdown-menu">
+                <a href="#">2025预热</a>
+                <a href="#">2024蔷薇宴</a>
+            </div>
+        </li>
+        <li>
+            <a href="#">关于我们</a>
+            <!-- 下拉菜单 -->
+            <div class="dropdown-menu">
+                <a href="#">人员招新</a>
+                <a href="#">组织历史</a>
+                <a href="#">联系我们</a>
+            </div>
+        </li>
+    </ul>
+
+    <!-- 汉堡菜单按钮 -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</nav>
+
+<!-- 主体内容 -->
+<div style="padding: 50px; text-align: center;">
+    <h1>欢迎来到我的网站！</h1>
+    <p>这是一个带有下滑菜单的导航栏示例。</p>
+</div>
+
+<!-- JavaScript控制逻辑 -->
+<script>
+    // 汉堡菜单控制逻辑
+    function toggleMenu() {
+        var navLinks = document.getElementById("navLinks");
+        navLinks.classList.toggle("active");
+    }
+</script>
+
+</body>
+</html>
